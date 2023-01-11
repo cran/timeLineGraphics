@@ -1,0 +1,53 @@
+---
+title: "timeLineGraphics"
+author: Barry Zeeberg [aut, cre]
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{timeLineGraphics}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+Generate a timeline that can represent, for example, sequential or overlapping events in a person's life
+
+![Henry's Life](Plot2.jpg){width=70%}
+
+Additional examples at higher resolution can be found at [Correlations between dutch artists and mathematicians](https://barryzee.github.io/vermeer/cssOverlay.html) and [Henry's life](https://barryzee.github.io/henry-timeline/henry.html)
+
+
+Events of the same type can be color coded, and representative images can be associated with each event. The picture is positioned within the event strip if it fits, otherwise it can optionally be positioned to the left of the event strip.
+
+The graphic is generated as .pdf, .png, and .html formats.
+
+The basic data structure is a list containing the relevant information for each event:
+
+		x<-list()
+
+		x[[1]]<-list()
+		x[[1]]$name<-"500 First Street"
+		x[[1]]$start<-1990
+		x[[1]]$end<-2010
+		x[[1]]$color<-"blue"
+		x[[1]]$pics<-list()
+		x[[1]]$pics[1]<-system.file("extdata/images/mockup/","house_amp029030.jpg",package="timeLineGraphics")
+
+The user manually prepares the components like x[[1]], and wraps them up in a function, for example,  example2(), that returns the entire list x containing components similar to x[[1]].
+
+The function stripPlot() iteratively plots each event. The function timeLineGraphics() is the driver for the overall process, and assigns reasonable default values for a substantial number of user-defined parameters that fine tune the colors, dimensions, etc.
+
+The process that generated the figure in the hyperlink above was invoked by:
+
+timeLineGraphics(example2(),pdfHeight=10,yearsTick=5,nameCEX=3,main="Henry's Life")
+
+
+
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
